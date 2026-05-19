@@ -12,20 +12,32 @@
     </style>
 </head>
 <body>
-<div class="box">
-    <h3>Генератор паролей</h3>
-    <input type="text" id="result" readonly placeholder="Нажми кнопку">
-    <button onclick="gen()">Сгенерировать</button>
-</div>
-<script>
-function gen() {
-    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&";
-    var pass = "";
-    for (var i = 0; i < 12; i++) {
-        pass += chars.charAt(Math.floor(Math.random()*chars.length));
-    }
-    document.getElementById("result").value = pass;
-}
-</script>
+    <div class="box">
+        <h3>Генератор паролей</h3>
+        <input type="text" id="Result" readonly placeholder="Нажми кнопку">
+        <button onclick="gen()">Сгенерировать</button>
+    </div>
+
+    <script>
+        function gen() {
+            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+            var pass = "";
+            var length = 12;
+
+            // Создаем массив для хранения безопасных случайных байт
+            var randomValues = new Uint32Array(length);
+
+            // Заполняем его настоящими криптографическими случайными числами
+            window.crypto.getRandomValues(randomValues);
+
+            for (var i = 0; i < length; i++) {
+                // Получаем индекс через остаток от деления безопасного числа на длину строки chars
+                var randomIndex = randomValues[i] % chars.length;
+                pass += chars.charAt(randomIndex);
+            }
+
+            document.getElementById("Result").value = pass;
+        }
+    </script>
 </body>
 </html>
