@@ -24,14 +24,10 @@
             var pass = "";
             var length = 12;
 
-            // Создаем массив для хранения безопасных случайных байт
             var randomValues = new Uint32Array(length);
-
-            // Заполняем его настоящими криптографическими случайными числами
             window.crypto.getRandomValues(randomValues);
 
             for (var i = 0; i < length; i++) {
-                // Получаем индекс через остаток от деления безопасного числа на длину строки chars
                 var randomIndex = randomValues[i] % chars.length;
                 pass += chars.charAt(randomIndex);
             }
