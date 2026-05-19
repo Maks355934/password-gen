@@ -22,7 +22,7 @@ function gen() {
     var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&";
     var pass = "";
     for (var i = 0; i < 12; i++) {
-        pass += chars.charAt(Math.floor(Math.random() chars.length));
+        pass += chars.charAt(Math.floor(Math.random()*chars.length));
     }
     document.getElementById("result").value = pass;
 }
